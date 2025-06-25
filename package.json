@@ -1,0 +1,14 @@
+{
+  "name": "BOT-INFO-MD",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@whiskeysockets/baileys": "^6.7.2",
+    "axios": "^1.6.8",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
