@@ -1,64 +1,43 @@
-# 📥 BOT WHATSAPP DESCARGADOR DE TIKTOK 🔥
-**Sin marca de agua | Sin API Key | Botones para elegir calidad**
+<h1 align="center">
+✨ INFO-BOT-MD ✨
+</h1>
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=0FF70F&center=true&vCenter=true&width=435&lines=🤖+INFO-BOT+MD+ACTIVO+24%2F7;🔧+Hecho+por+Jahseh+HC;💬+Contáctame:+51935040872" alt="Typing SVG" />
+</p>
+
+<p align="center">
+  <b>INFO-BOT-MD</b> es un bot de WhatsApp poderoso y personalizable, basado en Baileys. <br>
+  🚀 Perfecto para grupos, respuestas automáticas, comandos personalizados y más.
+</p>
 
 ---
 
-## 🚀 FUNCIONES:
-- Descargar videos de TikTok **sin marca de agua**
-- Elegir calidad: **HD**, **SD**, o **solo audio**
-- Todo funciona **sin usar ninguna API key**
-- Se activa escribiendo:  
-  ```
-  .tiktok [enlace]
-  ```
+## 🔥 Características
+
+✅ Multi-dispositivo  
+✅ Soporte 24/7  
+✅ Cambia estado dinámico  
+✅ Listo para Windows y Termux  
+✅ Fácil de editar y personalizar  
+✅ Integrado con Baileys  
 
 ---
 
-## 🛠️ INSTALACIÓN
+## 🛠️ Requisitos
 
-1. **Clona o descarga el ZIP**:
-   ```bash
-   unzip tiktok-bot.zip
-   cd tiktok-bot
-   ```
-
-2. **Instala dependencias**:
-   ```bash
-   npm install
-   ```
-
-3. **Inicia el bot**:
-   ```bash
-   node index.js
-   ```
-
-4. **Escanea el código QR** desde tu WhatsApp (te lo mostrará en consola).
+- Node.js `v18+` o superior
+- Git
+- Termux o Windows con consola
 
 ---
 
-## 📦 USO
+## 📲 INSTALACIÓN EN TERMUX
 
-Envía un mensaje a tu bot como este:
-```
-.tiktok https://www.tiktok.com/@usuario/video/1234567890
-```
-
-El bot responderá con **botones** para que elijas:
-- 🎥 Descargar en HD
-- 📺 Descargar en SD
-- 🎧 Descargar audio
-
----
-
-## 🤖 DEPENDENCIAS
-
-- `@whiskeysockets/baileys` — Para manejar WhatsApp
-- `node-fetch` — Para hacer solicitudes HTTP
-- `cheerio` y `axios` — Para scrapear TikTok
-
----
-
-## 💡 CRÉDITOS
-
-- Código adaptado y generado por [Jahseh]
-- Usamos técnicas de scraping y parsing sin necesidad de claves API
+```bash
+pkg update && pkg upgrade
+pkg install git nodejs -y
+git clone https://github.com/jahseh16/INFO-BOT-MD
+cd INFO-BOT-MD
+npm install
+node index.js
