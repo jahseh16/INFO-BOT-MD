@@ -59,8 +59,13 @@ node index.js       # Inicia el bot manualmente
 ```
 👑 CREADO POR
 
-•  👤 Nombre: Jahseh HC
+<p align="center">
+  <a href="https://wa.me/51935040872">
+    <img title="Autor" src="https://img.shields.io/badge/JAHSEH OFC-SAKURA?style=for-the-badge&logo=whatsapp">
+  </a>
+  <a href="https://instagram.com/jahseh_hc">
+    <img title="Instagram del creador" src="https://img.shields.io/badge/@jahseh_hc-purple?style=for-the-badge&logo=instagram">
+  </a>
+</p>
 
-•  📞 WhatsApp: +51 935 040 872
-
-•  📸 Instagram: @Jahseh_HC
+![line](https://github.com/AnderMendoza/AnderMendoza/raw/main/assets/line-neon.gif)
