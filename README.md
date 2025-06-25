@@ -5,8 +5,6 @@
 <p <p align="center">
   <img src="https://i.ibb.co/ymYhbMKg/catalogo.jpg" width="300">
 </p>
-font=Fira+Code&size=22&pause=1000&color=0FF70F&center=true&vCenter=true&width=435&lines=🤖+INFO-BOT+MD+ACTIVO+24%2F7;🔧+Hecho+por+Jahseh+HC;💬+Contáctame:+51935040872" alt="Typing SVG" />
-</p>
 
 <p align="center">
   <b>INFO-BOT-MD</b> es un bot de WhatsApp poderoso y personalizable, basado en Baileys. <br>
