@@ -41,3 +41,26 @@ git clone https://github.com/jahseh16/INFO-BOT-MD
 cd INFO-BOT-MD
 npm install
 node index.js
+```
+##💻 INSTALACIÓN EN WINDOWS
+
+```bash
+git clone https://github.com/jahseh16/INFO-BOT-MD
+cd INFO-BOT-MD
+npm install
+node index.js
+```
+🚀 COMANDOS ÚTILES
+
+```bash
+npm start           # Iniciar el bot
+npm install         # Instala dependencias
+node index.js       # Inicia el bot manualmente
+```
+👑 CREADO POR
+
+•  👤 Nombre: Jahseh HC
+
+•  📞 WhatsApp: +51 935 040 872
+
+•  📸 Instagram: @Jahseh_HC
