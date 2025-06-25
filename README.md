@@ -1,3 +1,4 @@
+![line](https://github.com/AnderMendoza/AnderMendoza/raw/main/assets/line-neon.gif)
 <h1 align="center">
 ✨ INFO-BOT-MD ✨
 </h1>
@@ -23,6 +24,7 @@
 ✅ Integrado con Baileys  
 
 ---
+![line](https://github.com/AnderMendoza/AnderMendoza/raw/main/assets/line-neon.gif)
 
 ## 🛠️ Requisitos
 
