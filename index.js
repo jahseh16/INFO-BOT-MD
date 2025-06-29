@@ -3,6 +3,12 @@ const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = requi
 const P = require('pino');
 const qrcode = require('qrcode-terminal');
 const axios = require('axios');
+const Replicate = require('replicate');
+
+// 🔑 Token de Replicate (Llama 2)
+const replicate = new Replicate({
+  auth: 'r8_Ukbr7CdZnwRFbBsz8HqejuaIfZngYhR3Q1UOG'
+});
 
 // 🔁 Estados personalizados
 const statusList = [
@@ -13,7 +19,6 @@ const statusList = [
   '💬 Conéctate ahora',
   '👾 Te amo 7w7',
 ];
-
 let statusInterval = null;
 
 // 🧽 Limpiar texto HTML
@@ -24,18 +29,17 @@ function clean(data) {
   return data.replace(regex, "");
 }
 
-// 🔗 Acortador opcional (no acorta realmente)
+// 🔗 Acortador opcional
 async function shortener(url) {
   return url;
 }
 
-// 📥 Función TikTok (sin marca de agua)
+// 📥 Función TikTok
 const Tiktok = async (query) => {
   const { data } = await axios('https://lovetik.com/api/ajax/search', {
     method: 'POST',
     data: new URLSearchParams(Object.entries({ query })),
   });
-
   return {
     title: clean(data?.desc || 'Sin título'),
     author: clean(data?.author || 'Desconocido'),
@@ -68,27 +72,24 @@ async function iniciarBot() {
         if (statusInterval) clearInterval(statusInterval);
         const statusCode = lastDisconnect?.error?.output?.statusCode;
         const shouldReconnect = (statusCode !== DisconnectReason.loggedOut);
-        console.log(`❌ Conexión cerrada debido a: ${lastDisconnect?.error}, reconectando: ${shouldReconnect}`);
+        console.log(`❌ Conexión cerrada: ${lastDisconnect?.error}, reconectando: ${shouldReconnect}`);
         if (shouldReconnect) iniciarBot();
       }
 
       if (connection === 'open') {
-        console.log('✅ Bot conectado exitosamente');
-        console.log(`ID del Bot: ${sock.user?.id?.split(':')[0]}`);
+        console.log('✅ Bot conectado');
         if (statusInterval) clearInterval(statusInterval);
         let i = 0;
         statusInterval = setInterval(async () => {
           try {
-            if (!sock.user?.id) return;
             const nuevoEstado = statusList[i];
             await sock.updateProfileStatus(nuevoEstado);
-            console.log('📝 Info actualizada:', nuevoEstado);
+            console.log('📝 Estado actualizado:', nuevoEstado);
             i = (i + 1) % statusList.length;
           } catch (err) {
-            console.error('⚠ Error actualizando info:', err.message || err);
+            console.error('⚠ Error actualizando estado:', err.message);
           }
         }, 60000);
-        console.log('🕒 Intervalo de actualización de estado iniciado.');
       }
     });
 
@@ -100,25 +101,65 @@ async function iniciarBot() {
       const texto = msg.message?.conversation || msg.message?.extendedTextMessage?.text || '';
       const jid = msg.key.remoteJid;
 
+      // 🎬 TikTok
       if (texto.includes('tiktok.com')) {
         await sock.sendMessage(jid, { text: '⏳ Descargando video sin marca de agua...' });
-
         try {
           const data = await Tiktok(texto);
           const response = await axios.get(data.nowm, { responseType: 'arraybuffer' });
-
           await sock.sendMessage(jid, {
             video: Buffer.from(response.data),
             mimetype: 'video/mp4',
             fileName: `${data.title}.mp4`,
             caption: `🎬 *${data.title}*\n👤 *Autor:* ${data.author}\n\n✅ *Video sin marca de agua*`,
           });
-
         } catch (e) {
-          console.error(e);
           await sock.sendMessage(jid, { text: '❌ Error al obtener el video.' });
         }
       }
+
+      // 🧠 Chat con LLaMA 2
+      if (texto.startsWith('.ia ')) {
+        const prompt = texto.slice(4).trim();
+        if (!prompt) return sock.sendMessage(jid, { text: '❌ Escribe algo después de `.ia`' });
+
+        await sock.sendMessage(jid, { text: '🤖 Pensando...' });
+
+        try {
+          const output = await replicate.run("meta/llama-2-7b-chat", {
+            input: {
+              prompt: prompt,
+              max_length: 300,
+              temperature: 0.7
+            }
+          });
+
+          const respuesta = output?.join('') || '🤖 No entendí eso.';
+          await sock.sendMessage(jid, { text: respuesta });
+
+        } catch (err) {
+          console.error('❌ Error al generar respuesta:', err);
+          await sock.sendMessage(jid, { text: '❌ Error al responder con la IA.' });
+        }
+      }
+
+      // ℹ️ Comando de información
+      if (texto === '.info') {
+        await sock.sendMessage(jid, {
+          text: '📊 Este es un bot creado por *Jahseh*\n\nComandos disponibles:\n- Enlace de TikTok: descarga video\n- .ia [texto]: hablar con IA\n- .info: muestra esta info\n- .hola: saludo automático\n\nPuedes agregar más comandos abajo 📌.'
+        });
+      }
+
+      // 👋 Comando de saludo
+      if (texto === '.hola') {
+        await sock.sendMessage(jid, { text: '👋 ¡Hola! ¿En qué puedo ayudarte?' });
+      }
+
+      // 📌 Espacio para más comandos
+      // if (texto === '.nuevo') {
+      //   await sock.sendMessage(jid, { text: '¡Comando personalizado activo!' });
+      // }
+
     });
 
   } catch (error) {
@@ -143,6 +184,3 @@ process.on('SIGTERM', async () => {
   if (statusInterval) clearInterval(statusInterval);
   process.exit(0);
 });
-
-
-
